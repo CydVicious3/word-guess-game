@@ -1,4 +1,4 @@
-const words = [ 'Upside Down', 'Mind Flayer', 'Eleven', 'Hopper', 'Mind Flayer', 'Demogorgon', 'Hawkins', 'Will', 'Starcourt Mall', 'Joyce', 'Mike', 'Dustin', 'Lucas', 'Nancy', 'Pollywog', 'The Gate', ]
+const words = ['upside down', 'mind flayer', 'eleven', 'hopper', 'demogorgon', 'hawkins', 'will', 'starcourt mall', 'joyce', 'mike', 'dustin', 'lucas', 'nancy', 'pollywog', 'the gate',]
 
 const changeDisplay = function () {
     document.getElementById('display').innerHTML = `
@@ -6,8 +6,8 @@ const changeDisplay = function () {
 }
 
 const getRandWord = () {
-    return words[Math.floor(math.random () * words.length)]
-    .toLowerCase()
+    return words[Math.floor(math.random() * words.length)]
+        .toLowerCase()
 
 }
 
@@ -15,13 +15,15 @@ let wins = 0
 let losses = 0
 let guesses = 5
 const lettersGuessed = []
+let word = getRandWord()
+
 
 
 
 const displayWord = function (chosen) {
     let wordStr = ''
     word.split('').forEach(function (letter) {
-        if (letter === chosen || lettersGuessed.indexOf(letter) !=== -1) {
+        if (lettersGuessed.indexOf(letter) !== -1) {
             wordStr += `${letter} `
         }
         else {
@@ -33,9 +35,9 @@ const displayWord = function (chosen) {
 
 document.onkeyup = function (event) {
     if (event.keyCode >= 65 && event.keyCode <= 90) {
-       if (word.includes(event.key)) {
-           lettersGuessed.push(event.key)
-           displayWord(event.key)
-       }
+        if (word.includes(event.key)) {
+            lettersGuessed.push(event.key)
+            displayWord(event.key)
+        }
     }
 }
