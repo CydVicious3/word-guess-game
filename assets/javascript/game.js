@@ -20,24 +20,40 @@ let word = getRandWord()
 
 
 
-const displayWord = function (chosen) {
-    let wordStr = ''
+const displayWord = function () {
+    let wordStr = ' '
+    let winStatus = true
     word.split('').forEach(function (letter) {
         if (lettersGuessed.indexOf(letter) !== -1) {
             wordStr += `${letter} `
         }
         else {
             wordStr += '_ '
+            winStatus = false
         }
     })
+    if winStatus {
+        alert('You Won!')
+    }
     document.getElementById('word').textContent = wordStr
 }
 
 document.onkeyup = function (event) {
     if (event.keyCode >= 65 && event.keyCode <= 90) {
-        if (word.includes(event.key)) {
+        if (lettersGuessed.indexOf(eventkey) === -1) {
             lettersGuessed.push(event.key)
-            displayWord(event.key)
+            document.getElementById('letters').textContent = lettersGuessed.join(', ')
+
+            if (word.includes(event.key)) {
+                displayWord(event.key)
+            } else {
+                guesses--
+                if (guesses <= 0) {
+                    alert('You Lost!')
+                }
+            }
         }
     }
 }
+
+displayWord()
