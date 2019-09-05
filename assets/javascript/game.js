@@ -1,59 +1,89 @@
+// arrray of words
 const words = ['upside down', 'mind flayer', 'eleven', 'hopper', 'demogorgon', 'hawkins', 'will', 'starcourt mall', 'joyce', 'mike', 'dustin', 'lucas', 'nancy', 'pollywog', 'the gate',]
 
-const changeDisplay = function () {
-    document.getElementById('display').innerHTML = `
-    <h2> Type a letter of choice to guess the word!  ${displayWord}</h2>`
-}
+// const changeDisplay = function () {
+//     document.getElementById('display').innerHTML = `
+//     <h2> Type a letter of choice to guess the word!  ${displayWord}</h2>`
+// }
 
+// selects new random word
 const getRandWord = () {
     return words[Math.floor(math.random() * words.length)]
         .toLowerCase()
-
 }
 
+// starting values
 let wins = 0
 let losses = 0
 let guesses = 5
-const lettersGuessed = []
+let lettersGuessed = []
 let word = getRandWord()
 
+// resets game to initial state
+const reset = function () {
+    word = getRandWord()
+    lettersGuessed = []
+    guesses = 5
+    displayWord()
+    document.getElementById('guesses').textContent = guesses
+    document.getElementById('wins').textContent = wins
+    document.getElementById('losses').textContent = losses
+    document.getElementById('letters').textContent = lettersGuessed.join(', ')
+}
 
-
-
+// displays words
 const displayWord = function () {
+    //  string of letters and blanks
     let wordStr = ' '
+    // toggle win scenario
     let winStatus = true
+    //  loops words and builds string
     word.split('').forEach(function (letter) {
+        //  letters guessed
         if (lettersGuessed.indexOf(letter) !== -1) {
             wordStr += `${letter} `
         }
         else {
+            //  adds blanks for missing letters
             wordStr += '_ '
+            //  indicators for pending win
             winStatus = false
         }
     })
-    if winStatus {
-        alert('You Won!')
-    }
+    //  state of word string
     document.getElementById('word').textContent = wordStr
-}
-
-document.onkeyup = function (event) {
-    if (event.keyCode >= 65 && event.keyCode <= 90) {
-        if (lettersGuessed.indexOf(eventkey) === -1) {
-            lettersGuessed.push(event.key)
-            document.getElementById('letters').textContent = lettersGuessed.join(', ')
-
-            if (word.includes(event.key)) {
-                displayWord(event.key)
-            } else {
-                guesses--
-                if (guesses <= 0) {
-                    alert('You Lost!')
-                }
-            }
-        }
+    //  win if no blanks added
+    if winStatus {
+        alert(`You Won! The word is:  ${word}`)
+        wins++
+        //  reset game
+        reset()
     }
 }
+//  confirms letter inclusion
+const checkLetter = letter() {
+    // updates guessed letters
+    lettersGuessed.push(event.key)
+document.getElementById('letters').textContent = lettersGuessed.join(', ')
+// guessed letter in word
+if (word.includes(event.key)) {
+    // updates word display
+    displayWord(event.key)
+} else {
+    // decrement guesses
+    guesses--
+    document.getElementById('guesses').textContent = guesses
+    //  expired guesses
+    if (guesses <= 0) {
+        alert(`You Lost! The word is: ${word}`)
+        losses++
+        // reset game
+        reset()
+    }
+}
+}
+//  locked to unguessed letters
+document.onkeyup = event => event.keyCode >= 65 && event.keyCode <= 90 && lettersGuessed.indexOf(event.key) === -1 ? checkLetter(event.key) : null
 
-displayWord()
+// start game
+reset()
