@@ -4,23 +4,87 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
     <title>Word Guess Game - Stranger Things</title>
-    
+    <style>
+        h1 {
+            text-align: justify;
+        }
+        h2, h3, h4 {
+            text-align: justify;
+        }
+        .container {
+            display: block;
+             position: relative;
+            width: 50%;
+        }
 
+        .headerContainer {
+            display: block;
+             position: relative;
+            width: 50%;
+}
+        .mainHeader {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 50%;
+    }
+        .image {
+            opacity: 1;
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: .5s ease;
+            backface-visibility: hidden;
+}
+      .headerContainer:hover .image {
+            opacity: 0.3;
+}
+
+        .headerContainer:hover .middle {
+                opacity: 1;
+}
+        .middle {
+            transition: .5s ease;
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%)
+}
+
+        .text {
+            background-color: #ffffff;
+            color: black;
+            font-size: 24px;
+            padding: 16px 32px;
+}
+    </style>
 </head>
 <body>
-    
+    <div class="headerContainer">
+        <span class="mainHeader"><img src="./assets/images/strangerthings.0.jpg"></span>
+        <div class="middle">
+        <div class="text">Type a letter to guess the word!</div>
+        </div>
+    </div>
+
+    <div class="container">
     <h1>Stranger Things Trivia</h1>
     <h2 id="word"> </h2>
-    <h3>Guessed Letters:  <span id="letters"></span> </h3>
+    <h3>Guessed Letters: <span id="letters"></span> </h3>
     <h4>Guesses Left: <span id="guesses">5</span></h4>
-    <h4>Wins: <span id="wins">0</span></h4>
-    <h4>Losses: <span id="losses">0</span></h4>
-    <script src="./game.js"></script>
+    <h4><i class="material-icons">mood</i>Wins:<span id="wins">0</span></h4>
+    <h4><i class="material-icons">mood_bad</i>Losses: <span id="losses">0</span></h4>
+    <script src="./assets/javascript/game.js"></script>
+    </div>
+   
 
-    <script type="text/javascript" src="js/materialize.min.js"></script>
+    
    
 </body>
 </html>

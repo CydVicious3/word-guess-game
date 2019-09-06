@@ -1,5 +1,5 @@
 // arrray of words
-const words = ['upside down', 'mind flayer', 'eleven', 'hopper', 'demogorgon', 'hawkins', 'will', 'starcourt mall', 'joyce', 'mike', 'dustin', 'lucas', 'nancy', 'pollywog', 'the gate',]
+const words = ['upsidedown', 'mindflayer', 'eleven', 'hopper', 'demogorgon', 'hawkins', 'will', 'starcourt mall', 'joyce', 'mike', 'dustin', 'lucas', 'nancy', 'pollywog', 'thegate']
 
 // const changeDisplay = function () {
 //     document.getElementById('display').innerHTML = `
@@ -7,8 +7,8 @@ const words = ['upside down', 'mind flayer', 'eleven', 'hopper', 'demogorgon', '
 // }
 
 // selects new random word
-const getRandWord = () {
-    return words[Math.floor(math.random() * words.length)]
+const getRandWord = () => {
+    return words[Math.floor(Math.random() * words.length)]
         .toLowerCase()
 }
 
@@ -53,34 +53,35 @@ const displayWord = function () {
     //  state of word string
     document.getElementById('word').textContent = wordStr
     //  win if no blanks added
-    if winStatus {
+    if (winStatus) {
         alert(`You Won! The word is:  ${word}`)
         wins++
         //  reset game
         reset()
     }
 }
-//  confirms letter inclusion
-const checkLetter = letter() {
+
+//  confirms letter inclusions
+const checkLetter = () => {
     // updates guessed letters
     lettersGuessed.push(event.key)
-document.getElementById('letters').textContent = lettersGuessed.join(', ')
-// guessed letter in word
-if (word.includes(event.key)) {
-    // updates word display
-    displayWord(event.key)
-} else {
-    // decrement guesses
-    guesses--
-    document.getElementById('guesses').textContent = guesses
-    //  expired guesses
-    if (guesses <= 0) {
-        alert(`You Lost! The word is: ${word}`)
-        losses++
-        // reset game
-        reset()
+    document.getElementById('letters').textContent = lettersGuessed.join(', ')
+    // guessed letter in word
+    if (word.includes(event.key)) {
+        // updates word display
+        displayWord(event.key)
+    } else {
+        // decrement guesses
+        guesses--
+        document.getElementById('guesses').textContent = guesses
+        //  expired guesses
+        if (guesses <= 0) {
+            alert(`You Lost! The word is: ${word}`)
+            losses++
+            // reset game
+            reset()
+        }
     }
-}
 }
 //  locked to unguessed letters
 document.onkeyup = event => event.keyCode >= 65 && event.keyCode <= 90 && lettersGuessed.indexOf(event.key) === -1 ? checkLetter(event.key) : null
